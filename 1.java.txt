@@ -1,0 +1,43 @@
+package selenium;
+
+import java.util.Scanner;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Seleniumfirst {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.gecko.driver","C:\\Users\\Sivadevi\\Documents\\testing\\geckodriver-v0.27.0-win64\\geckodriver.exe");
+	      FirefoxDriver driver=new FirefoxDriver();
+		
+		driver.get("https://www.roicians.com/contact-us/");
+		driver.findElement(By.name("your-name")).sendKeys("Devi");
+		driver.findElement(By.name("your-email")).sendKeys("devi@123");
+		driver.findElement(By.name("your-subject")).sendKeys("Regarding Training");
+		driver.findElement(By.name("your-message")).sendKeys("Training Details");
+		driver.findElement(By.cssSelector(".wpcf7-submit")).click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String actual = driver.findElement(By.cssSelector(".wpcf7-not-valid-tip")).getText();
+		
+		System.out.println(actual);
+		String expected = "Enter Right email";
+		
+		if (actual.equals(expected)) {
+			System.out.println("Test Passed");
+			}
+		else {
+			System.out.println("Test Failed");
+		}
+		}
+        
+
+	}
+
+
